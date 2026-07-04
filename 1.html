@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Full Model</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myApp"> <div ng-controller="MainController"> <h2>{{ userName | greetFilter }}</h2>
+        
+        <p>Enter a number to square:</p>
+        <input type="number" ng-model="numberInput">
+        
+        <p>Result from Service: <b>{{ getResult() }}</b></p>
+        
+    </div>
+
+    <script>
+        // 1. Module [cite: 115, 118]
+        var app = angular.module('myApp', []);
+
+        // 2. Config [cite: 120]
+        app.config(function() {
+            console.log("App initialized!");
+        });
+
+        // 3. Service (Logic) [cite: 146]
+        app.service('CalculationService', function() {
+            this.square = function(num) {
+                return num * num;
+            };
+        });
+
+        // 4. Custom Filter [cite: 106, 108]
+        app.filter('greetFilter', function() {
+            return function(name) {
+                return "Namaste, " + name + "!";
+            };
+        });
+
+        // 5. Controller & Scope [cite: 126, 128]
+        app.controller('MainController', function($scope, CalculationService) {
+            $scope.userName = "Gemini User";
+            $scope.numberInput = 5;
+            
+            $scope.getResult = function() {
+                return CalculationService.square($scope.numberInput);
+            };
+        });
+    </script>
+
+</body>
+</html>
