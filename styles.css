@@ -307,8 +307,8 @@ body {
 }
 
 .image-placeholder {
-    width: 320px;
-    height: 320px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     background: var(--bg-light);
     display: flex;
